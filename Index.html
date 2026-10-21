@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoDrive — Премиальные автомобили</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(11, 15, 25, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #3b82f6;
+        }
+
+        nav a {
+            color: #9ca3af;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #3b82f6;
+        }
+
+        .hero {
+            padding: 140px 5% 80px;
+            text-align: center;
+            background: radial-gradient(circle at center, #1e293b 0%, #0b0f19 70%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            color: #9ca3af;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-container input:focus {
+            border-color: #3b82f6;
+        }
+
+        .catalog {
+            padding: 40px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .catalog-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #161e2e;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card-specs {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .card-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: #3b82f6;
+            margin-bottom: 20px;
+            margin-top: auto;
+        }
+
+        .btn-avito {
+            display: block;
+            text-align: center;
+            background: #00aaff;
+            color: #fff;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-avito:hover {
+            background: #0088cc;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 5%;
+            color: #6b7280;
+            font-size: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">Auto<span>Drive</span></a>
+        <nav>
+            <a href="#catalog">Каталог</a>
+            <a href="https://www.avito.ru" target="_blank">Перейти на Avito</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Найди авто своей мечты</h1>
+        <p>Выбирайте авто из нашей подборки и переходите к покупке напрямую на Avito</p>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" onkeyup="filterCars()" placeholder="Поиск по названию...">
+        </div>
+    </section>
+
+    <section class="catalog" id="catalog">
+        <h2 class="catalog-title">Автомобили в наличии</h2>
+        <div class="grid" id="carGrid">
+
+            <!-- Авто 1 -->
+            <div class="card" data-title="bmw m5 f90">
+                <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80" alt="BMW M5">
+                <div class="card-content">
+                    <div class="card-title">BMW M5 F90</div>
+                    <div class="card-specs">4.4 л / 600 л.с. / 2021 г.</div>
+                    <div class="card-price">8 900 000 ₽</div>
+                    <a href="https://www.avito.ru/all?q=BMW+M5+F90" target="_blank" class="btn-avito">Купить на Avito</a>
+                </div>
+            </div>
+
+            <!-- Авто 2 -->
+            <div class="card" data-title="mercedes-benz g63 amg">
+                <img src="https://images.unsplash.com/photo-1520050206274-a1ae44613e6d?auto=format&fit=crop&w=800&q=80" alt="Mercedes G63">
+                <div class="card-content">
+                    <div class="card-title">Mercedes G63 AMG</div>
+                    <div class="card-specs">4.0 л / 585 л.с. / 2022 г.</div>
+                    <div class="card-price">18 500 000 ₽</div>
+                    <a href="https://www.avito.ru/all?q=Mercedes-Benz+G63+AMG" target="_blank" class="btn-avito">Купить на Avito</a>
+                </div>
+            </div>
+
+            <!-- Авто 3 -->
+            <div class="card" data-title="porsche 911 carrera">
+                <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=800&q=80" alt="Porsche 911">
+                <div class="card-content">
+                    <div class="card-title">Porsche 911 Carrera</div>
+                    <div class="card-specs">3.0 л / 385 л.с. / 2020 г.</div>
+                    <div class="card-price">12 300 000 ₽</div>
+                    <a href="https://www.avito.ru/all?q=Porsche+911+Carrera" target="_blank" class="btn-avito">Купить на Avito</a>
+                </div>
+            </div>
+
+            <!-- Авто 4 -->
+            <div class="card" data-title="audi rs6 avant">
+                <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80" alt="Audi RS6">
+                <div class="card-content">
+                    <div class="card-title">Audi RS6 Avant</div>
+                    <div class="card-specs">4.0 л / 600 л.с. / 2021 г.</div>
+                    <div class="card-price">11 200 000 ₽</div>
+                    <a href="https://www.avito.ru/all?q=Audi+RS6" target="_blank" class="btn-avito">Купить на Avito</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 AutoDrive. Все права защищены.</p>
+    </footer>
+
+    <script>
+        function filterCars() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getAttribute('data-title');
+                if (title.includes(input)) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
